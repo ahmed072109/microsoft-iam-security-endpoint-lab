@@ -50,7 +50,7 @@ User attributes including display name, department and job title were configured
 
 ### User Provisioning Evidence
 
-![Microsoft Entra ID users](screenshots/01-users-created.png)
+![Microsoft Entra ID users](screenshots/01-users-created(1).png)
 
 ---
 
@@ -72,7 +72,7 @@ Using security groups allows access to resources to be managed through group mem
 
 ### Security Groups
 
-![Microsoft Entra security groups](screenshots/02-security-groups.png)
+![Microsoft Entra security groups](screenshots/02-security-groups(2).png)
 
 ---
 
@@ -88,7 +88,7 @@ This demonstrates group-based identity administration and provides a foundation 
 
 ### Membership Verification
 
-![SG-IT membership](screenshots/03-sg-it-membership.png)
+![SG-IT membership](screenshots/03-sg-it-membership(1).png)
 
 ---
 
@@ -108,7 +108,7 @@ This provides administrators and security teams with visibility into identity ch
 
 ### Audit Log Evidence
 
-![Microsoft Entra group management audit logs](screenshots/04-group-management-audit-log.png)
+![Microsoft Entra group management audit logs](screenshots/04-group-management-audit-log(1).png)
 
 ---
 
@@ -149,9 +149,6 @@ Successfully implemented a basic enterprise IAM structure within Microsoft Entra
 - 5 departmental security groups
 - Department-based group membership
 - Identity attribute configuration
-- Audit verification of membership changes
-
-  This environment will be used as the foundation for additional IAM, security and endpoint management projects.
 - Audit verification of membership changes
 
 This environment will be used as the foundation for additional IAM, security and endpoint management projects.
