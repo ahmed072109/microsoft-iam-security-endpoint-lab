@@ -1,18 +1,28 @@
-# Project 01 - Microsoft Entra User & Group Management
+# Project 01 – Microsoft Entra ID User & Group Management
 
 ## Overview
 
-This project demonstrates the implementation of user and group management within Microsoft Entra ID for a simulated organisation.
+This project demonstrates practical Identity and Access Management (IAM) administration using Microsoft Entra ID within a simulated enterprise environment named **Falcon Tech Lab**.
 
-The lab forms part of my wider Microsoft IAM, Security & Endpoint portfolio and focuses on developing practical Identity and Access Management (IAM) administration skills.
+The objective was to build a basic identity structure, provision users, organise users using security groups, manage group membership, and verify administrative changes using Microsoft Entra audit logs.
 
-## Scenario
+---
 
-Falcon Tech is a simulated organisation with employees across multiple departments.
+## Technologies Used
 
-The organisation requires a structured identity management solution to securely manage employee identities and provide a scalable foundation for controlling access to company resources.
+- Microsoft Entra ID
+- Microsoft Azure
+- Microsoft Entra Admin Center
+- Entra Audit Logs
+- GitHub
 
-The following departments are represented:
+---
+
+## Lab Scenario
+
+Falcon Tech requires an identity structure for employees across several business departments.
+
+The following departments were created within the lab environment:
 
 - IT
 - Finance
@@ -20,33 +30,15 @@ The following departments are represented:
 - Sales
 - Management
 
-## Objectives
+Each employee was provisioned as a Microsoft Entra ID user and assigned to an appropriate departmental security group.
 
-The objectives of this lab are to:
+---
 
-- Create and manage Microsoft Entra user identities
-- Configure user attributes such as department and job title
-- Create departmental security groups
-- Assign users to appropriate security groups
-- Understand group-based access management
-- Review user identity properties
-- Review sign-in and audit information
-- Apply IAM administration best practices
+## User Provisioning
 
-## Environment
+Five test employee identities were created in Microsoft Entra ID.
 
-- Microsoft Entra ID
-- Microsoft Entra Admin Center
-- Microsoft Entra Free
-- GitHub for project documentation
-
-## Implementation
-
-### 1. User Creation
-
-Five test users will be created to represent employees from different departments within Falcon Tech.
-
-| User | Department | Job Title |
+| User | Department | Role |
 |---|---|---|
 | Adam Wilson | IT | IT Support Engineer |
 | Sarah Khan | Finance | Finance Analyst |
@@ -54,66 +46,112 @@ Five test users will be created to represent employees from different department
 | Emma Taylor | Sales | Sales Executive |
 | David Brown | Management | Operations Manager |
 
-User attributes such as department and job title will be configured to provide structured identity information.
+User attributes including display name, department and job title were configured to simulate an enterprise identity environment.
 
-### 2. Security Group Creation
+### User Provisioning Evidence
 
-Departmental security groups will be created to provide a scalable method of managing access.
+![Microsoft Entra ID users](screenshots/01-users-created.png)
 
-The following security groups will be configured:
+---
 
-- SG-IT
-- SG-Finance
-- SG-HR
-- SG-Sales
-- SG-Management
+## Security Group Management
 
-### 3. Group Membership
+Departmental security groups were created using the **Assigned** membership model.
 
-Each employee will be assigned to the security group corresponding to their department.
+The following groups were configured:
 
-This demonstrates the principle of managing access through groups rather than assigning permissions individually to every user.
+| Security Group | Purpose |
+|---|---|
+| SG-IT | IT department access |
+| SG-Finance | Finance department access |
+| SG-HR | Human Resources access |
+| SG-Sales | Sales department access |
+| SG-Management | Management access |
+
+Using security groups allows access to resources to be managed through group membership rather than assigning permissions individually to users.
+
+### Security Groups
+
+![Microsoft Entra security groups](screenshots/02-security-groups.png)
+
+---
+
+## Group Membership Management
+
+Each user was assigned to the security group corresponding to their department.
+
+For example:
+
+**Adam Wilson → SG-IT**
+
+This demonstrates group-based identity administration and provides a foundation for implementing role-based and least-privilege access controls.
+
+### Membership Verification
+
+![SG-IT membership](screenshots/03-sg-it-membership.png)
+
+---
+
+## Audit & Monitoring
+
+Microsoft Entra audit logs were used to verify changes made within the directory.
+
+The audit trail recorded successful **Add member to group** operations under the **GroupManagement** category.
+
+This provides administrators and security teams with visibility into identity changes and allows investigation of:
+
+- What action occurred
+- When the change occurred
+- Whether the operation succeeded
+- Which identity or group was affected
+- Which actor initiated the change
+
+### Audit Log Evidence
+
+![Microsoft Entra group management audit logs](screenshots/04-group-management-audit-log.png)
+
+---
 
 ## IAM Concepts Demonstrated
 
-This project demonstrates several fundamental IAM concepts:
+This project provided hands-on experience with:
 
-- Identity lifecycle management
-- User provisioning
+- Identity provisioning
+- User account management
+- User attribute management
+- Microsoft Entra security groups
+- Assigned group membership
 - Group-based access management
-- Security groups
-- User attributes
-- Role-Based Access Control foundations
-- Principle of least privilege
-- Centralised identity administration
+- Identity lifecycle concepts
+- IAM auditing
+- Administrative activity monitoring
+- Microsoft Entra object relationships
 
-## Screenshots
+---
 
-Screenshots demonstrating the implementation will be added as the lab progresses.
+## Security Considerations
 
-Sensitive information including passwords, tenant IDs, subscription IDs, authentication tokens and personal account information will not be published.
+In a production environment, access should generally be assigned through groups rather than directly to individual users.
 
-## Key Learnings
+This improves scalability and supports principles such as:
 
-This section will be updated after completing the lab to document the practical skills, challenges and IAM concepts learned during implementation.
+**Role-Based Access Control (RBAC)** and **Least Privilege**.
 
-## Next Steps
+Administrative changes should also be monitored through audit logs to provide accountability and support security investigations.
 
-Following completion of this project, the lab environment will be expanded to include:
+---
 
-- Role-Based Access Control (RBAC)
-- Least Privilege Administration
-- Multi-Factor Authentication (MFA)
-- Self-Service Password Reset (SSPR)
-- Conditional Access
-- Privileged Identity Management (PIM)
-- Identity Governance
-- Microsoft Intune
-- Endpoint Security
-- Microsoft Defender
-- Zero Trust access controls
+## Outcome
 
-- 
-- Endpoint Security
-- Microsoft Defender
-- Zero Trust access controls
+Successfully implemented a basic enterprise IAM structure within Microsoft Entra ID consisting of:
+
+- 5 employee identities
+- 5 departmental security groups
+- Department-based group membership
+- Identity attribute configuration
+- Audit verification of membership changes
+
+  This environment will be used as the foundation for additional IAM, security and endpoint management projects.
+- Audit verification of membership changes
+
+This environment will be used as the foundation for additional IAM, security and endpoint management projects.
