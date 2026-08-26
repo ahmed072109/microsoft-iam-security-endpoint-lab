@@ -24,198 +24,137 @@ Administrative role assignments were then verified using Microsoft Entra audit l
 
 ## Lab Scenario
 
-Falcon Tech requires administrative responsibilities to be delegated securely across the IT environment.
+Falcon Tech requires administrative responsibilities to be separated between members of the IT team.
 
-Rather than granting administrators unrestricted access through the Global Administrator role, specific built-in Microsoft Entra roles were assigned according to job responsibilities.
+Rather than providing all IT administrators with Global Administrator access, individual roles were assigned based on operational responsibilities.
 
-Two role assignments were configured:
+Two users were selected for delegated administrative access:
 
-| User | Administrative Role | Purpose |
+| User | Administrative Role | Responsibility |
 |---|---|---|
-| David Brown | User Administrator | Manage users and groups |
-| Adam Wilson | Helpdesk Administrator | Perform helpdesk-related identity administration |
+| David Brown | User Administrator | User and group administration |
+| Adam Wilson | Helpdesk Administrator | Password resets and first-line user support |
 
-This approach demonstrates the principle of **least privilege**, where users receive only the permissions required to perform their responsibilities.
-
----
-
-## Microsoft Entra Administrative Roles
-
-Microsoft Entra ID provides built-in administrative roles that allow organizations to delegate specific administrative permissions.
-
-Using dedicated administrative roles reduces the need to assign highly privileged roles such as Global Administrator.
-
-For this lab, two built-in roles were used:
-
-### User Administrator
-
-The **User Administrator** role was assigned to **David Brown**.
-
-This role provides permissions for managing user and group-related activities within Microsoft Entra ID.
-
-### Helpdesk Administrator
-
-The **Helpdesk Administrator** role was assigned to **Adam Wilson**.
-
-This role provides permissions appropriate for common helpdesk identity administration tasks while avoiding broader administrative privileges.
+This approach follows the **principle of least privilege**, where users receive only the permissions required to perform their responsibilities.
 
 ---
 
-## User Administrator Role Assignment
+## Task 1 – Assign the User Administrator Role
 
-David Brown was assigned the **User Administrator** role.
+David Brown required permissions to perform user administration tasks.
 
-The role was assigned through:
+I navigated to:
 
 **Microsoft Entra ID → Roles and administrators → User Administrator → Assignments**
 
-After the assignment was completed, Microsoft Entra confirmed that David Brown had successfully been added to the role.
+The **User Administrator** role was assigned to David Brown.
 
-### User Administrator Assignment Evidence
+This role provides delegated permissions for managing users and groups, including user account administration and selected password-management capabilities.
 
-![User Administrator role assignment](screenshots/01-user-administrator-assignment.png)
+### Evidence – User Administrator Assignment
 
----
+![User Administrator role assignment](screenshots/01-user-administrator-role-assignment.png)
 
-## Helpdesk Administrator Role Assignment
-
-Adam Wilson was assigned the **Helpdesk Administrator** role.
-
-This demonstrates how administrative responsibilities can be separated between users rather than providing all administrators with unrestricted privileges.
-
-### Helpdesk Administrator Assignment Evidence
-
-![Helpdesk Administrator role assignment](screenshots/02-helpdesk-administrator-assignment.png)
+The assignment confirms that David Brown has been successfully granted the User Administrator role.
 
 ---
 
-## Role-Based Access Control
+## Task 2 – Review User Administrator Permissions
 
-Role-Based Access Control allows permissions to be assigned according to an individual's responsibilities.
+Before relying on the role assignment, I reviewed the permissions associated with the User Administrator role.
 
-In this lab:
+This helped verify what administrative capabilities were being delegated and ensured that a more privileged role such as Global Administrator was not required.
 
-**David Brown → User Administrator**
+### Evidence – User Administrator Role Permissions
 
-**Adam Wilson → Helpdesk Administrator**
+![User Administrator role permissions](screenshots/02-user-administrator-role-permissions.png)
 
-This creates a separation of administrative responsibilities.
-
-Instead of giving both users Global Administrator access, each account receives a role appropriate to its intended function.
-
-This reduces unnecessary privileged access and helps limit the potential impact of compromised administrator accounts.
+Reviewing role permissions is an important part of least-privilege administration because administrators should understand exactly what access is being granted.
 
 ---
 
-## Principle of Least Privilege
+## Task 3 – Verify the Role Assignment Using Audit Logs
 
-The **Principle of Least Privilege (PoLP)** states that users should receive only the permissions required to perform their responsibilities.
+After assigning the role, I used Microsoft Entra audit logs to verify that the administrative change had been recorded.
 
-Applying least privilege helps organizations:
+I navigated to:
 
-- Reduce unnecessary administrative access
-- Limit the impact of compromised accounts
-- Reduce the attack surface
-- Improve accountability
-- Separate administrative responsibilities
-- Strengthen identity security
+**Microsoft Entra ID → Monitoring & health → Audit logs**
 
-In this lab, dedicated administrative roles were used instead of assigning Global Administrator privileges.
+The audit logs were reviewed for **RoleManagement** activity.
 
----
+An **Add member to role** event was identified.
 
-## Audit Log Verification
+The event showed:
 
-Microsoft Entra audit logs were used to verify the administrative role assignments.
+- Activity: Add member to role
+- Category: RoleManagement
+- Status: Success
+- Target user: David Brown
 
-After the User Administrator role was assigned to David Brown, the audit logs recorded:
+### Evidence – Role Assignment Audit Event
 
-- **Category:** RoleManagement
-- **Activity:** Add member to role
-- **Status:** Success
-- **Target:** David Brown
-- **Role:** User Administrator
+![Role assignment audit log](screenshots/03-role-assignment-audit.png)
 
-The audit log's **Modified Properties** section confirmed that the role added to the account was **User Administrator**.
+The audit event provides evidence that the administrative role assignment was successfully performed and recorded by Microsoft Entra ID.
 
-### User Administrator Audit Evidence
+I also reviewed the **Modified Properties** within the audit event.
 
-![User Administrator audit log](screenshots/03-user-administrator-audit-log.png)
+The recorded role information identified:
+
+**User Administrator**
+
+This demonstrated how Entra audit logs can be used to investigate and verify privileged administrative changes.
 
 ---
 
-The Helpdesk Administrator assignment was also recorded within Microsoft Entra audit logs.
+## Task 4 – Assign the Helpdesk Administrator Role
 
-The audit evidence confirmed that Adam Wilson was assigned the **Helpdesk Administrator** role.
+A second administrative role was configured to demonstrate separation of responsibilities.
 
-### Helpdesk Administrator Audit Evidence
+Adam Wilson was selected to perform first-line helpdesk administration.
 
-![Helpdesk Administrator audit log](screenshots/04-helpdesk-administrator-audit-log.png)
+I navigated to:
 
----
+**Microsoft Entra ID → Roles and administrators → Helpdesk Administrator → Assignments**
 
-## IAM Concepts Demonstrated
+The **Helpdesk Administrator** role was assigned to Adam Wilson.
 
-This project provided hands-on experience with:
+### Evidence – Helpdesk Administrator Assignment
 
-- Microsoft Entra administrative roles
-- Role-Based Access Control (RBAC)
-- Principle of Least Privilege
-- Administrative role assignment
-- Privileged access management concepts
-- Separation of administrative responsibilities
-- Identity security
-- Role management
-- Administrative auditing
-- Microsoft Entra audit logs
-- Role assignment verification
+![Helpdesk Administrator role assignment](screenshots/04-helpdesk-administrator-assignment.png)
+
+This role provides appropriate permissions for common helpdesk activities without granting broader administrative access.
 
 ---
 
-## Security Considerations
+## Task 5 – Verify the Helpdesk Administrator Assignment
 
-Administrative privileges should be assigned carefully because privileged accounts can make significant changes within an identity environment.
+The second role assignment was also verified using Microsoft Entra audit logs.
 
-Organizations should avoid assigning Global Administrator access when a more limited administrative role can perform the required task.
+The relevant **RoleManagement** event was opened and its modified properties were reviewed.
 
-Using dedicated roles such as **User Administrator** and **Helpdesk Administrator** helps reduce excessive permissions and supports least-privilege security practices.
+The event identified the assigned role as:
 
-Administrative role assignments should also be monitored through audit logs to provide accountability and allow security teams to investigate changes to privileged access.
+**Helpdesk Administrator**
 
-In larger production environments, additional privileged identity controls such as Microsoft Entra Privileged Identity Management (PIM) can provide further protection for administrative access.
+### Evidence – Helpdesk Administrator Audit Event
 
----
+![Helpdesk Administrator audit log](screenshots/05-helpdesk-role-audit.png)
 
-## What I Learned
-
-Through this project I gained practical experience with:
-
-- Navigating Microsoft Entra administrative roles
-- Understanding the difference between administrative roles
-- Assigning built-in roles to users
-- Applying least-privilege access principles
-- Separating administrative responsibilities
-- Reviewing RoleManagement events
-- Investigating administrative changes using audit logs
-- Identifying the target user of a role assignment
-- Reviewing modified properties to determine which role was assigned
-
-This demonstrated how Microsoft Entra ID can be used to securely delegate administrative responsibilities while maintaining visibility and accountability.
+This confirmed that the role assignment was successfully recorded within Microsoft Entra ID.
 
 ---
 
-## Outcome
+## RBAC Design
 
-Successfully implemented and verified Microsoft Entra RBAC within the Falcon Tech Lab environment.
+The final administrative model implemented in the lab was:
 
-The project included:
-
-- Assignment of the User Administrator role to David Brown
-- Assignment of the Helpdesk Administrator role to Adam Wilson
-- Implementation of least-privilege administrative access
-- Separation of administrative responsibilities
-- Verification of role assignments through Microsoft Entra audit logs
-- Investigation of RoleManagement audit events
-- Verification of assigned roles through audit log modified properties
-
-This project builds upon the identity and group management environment created in Project 01 and provides a foundation for more advanced Microsoft Entra identity security projects.
+```text
+Falcon Tech Lab
+│
+├── David Brown
+│   └── User Administrator
+│
+└── Adam Wilson
+    └── Helpdesk Administrator
