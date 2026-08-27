@@ -22,11 +22,11 @@ The purpose of this lab was to demonstrate how MFA strengthens identity security
 ## Tasks Completed
 
 - Reviewed the Microsoft Authenticator authentication method policy
-- Enabled enhanced Microsoft Authenticator security settings
+- Configured Microsoft Authenticator security settings
 - Enabled application name display in push notifications
 - Enabled geographic location display in push notifications
 - Required a test user to register Microsoft Authenticator
-- Registered Microsoft Authenticator using a QR code
+- Registered Microsoft Authenticator for the test user
 - Verified Microsoft Authenticator registration
 - Configured Authenticator notifications as the user's default sign-in method
 - Tested MFA authentication
@@ -38,9 +38,9 @@ The purpose of this lab was to demonstrate how MFA strengthens identity security
 
 Microsoft Authenticator was configured through the Microsoft Entra authentication methods policy.
 
-Additional security information was enabled for Authenticator push notifications, including application name and geographic location.
+Additional security information was enabled for Authenticator push notifications, including the application name and geographic location.
 
-These features provide users with additional context when receiving authentication requests and can help reduce the risk of approving fraudulent MFA prompts.
+These features provide users with additional context when receiving authentication requests and can help reduce the risk of users approving fraudulent MFA prompts.
 
 ![Microsoft Authenticator Security Settings](01-authenticator-security-settings.png)
 
@@ -48,11 +48,11 @@ These features provide users with additional context when receiving authenticati
 
 ## 2. Review Microsoft Authenticator Policy
 
-The Microsoft Authenticator policy was reviewed to confirm that Authenticator was available to users.
+The Microsoft Authenticator authentication method policy was reviewed to confirm that Authenticator was available to users.
 
-Application name and geographic location information were enabled for Authenticator notifications.
+Application name and geographic location information were enabled for Authenticator push notifications.
 
-This provides additional context to users when reviewing MFA requests.
+This provides users with additional information when evaluating authentication requests and helps them identify potentially suspicious sign-in attempts.
 
 ![Microsoft Authenticator Policy](02-authenticator-security-settings.png)
 
@@ -64,11 +64,13 @@ A test account, **Adam Wilson**, was used to validate the MFA configuration.
 
 When the user signed in, Microsoft Entra required additional security information to be configured.
 
-The user was prompted to set up Microsoft Authenticator as an authentication method.
+The user was prompted to set up Microsoft Authenticator as an additional authentication method.
 
 ![User MFA Registration Prompt](03-user-mfa-registration-prompt.png)
 
-The Authenticator application was then configured by scanning the Microsoft Entra QR code and completing the registration process.
+Microsoft Authenticator was then configured for the test account by completing the registration process.
+
+This established the user's mobile device as an additional authentication factor.
 
 ---
 
@@ -78,13 +80,13 @@ After registration, the authentication methods assigned to the test user were re
 
 Microsoft Authenticator was successfully registered to the user's mobile device.
 
-The configuration showed:
+The configuration confirmed:
 
-- Microsoft Authenticator registered
-- Mobile device successfully associated with the account
-- Authenticator notification configured as the default sign-in method
-- System-preferred MFA enabled
-- `PhoneAppNotification` selected as the preferred MFA method
+- Microsoft Authenticator was registered
+- A mobile device was successfully associated with the account
+- Microsoft Authenticator notification was configured as the default sign-in method
+- System-preferred MFA was enabled
+- `PhoneAppNotification` was shown as the system-preferred MFA method
 
 ![Microsoft Authenticator Registration Verified](04-user-mfa-registration-verified.png)
 
@@ -102,7 +104,7 @@ The authentication process demonstrated in this lab was:
 
 ↓
 
-**MFA requirement triggered**
+**MFA requirement evaluated**
 
 ↓
 
@@ -110,13 +112,15 @@ The authentication process demonstrated in this lab was:
 
 ↓
 
-**User approves authentication request**
+**User verifies the authentication request**
 
 ↓
 
 **Access granted**
 
-This demonstrates how MFA provides an additional layer of protection if a user's password becomes compromised.
+This demonstrates how MFA provides an additional security layer beyond password-only authentication.
+
+If a user's password is compromised, an attacker would still need to satisfy the additional authentication requirement before gaining access.
 
 ---
 
@@ -126,25 +130,44 @@ This demonstrates how MFA provides an additional layer of protection if a user's
 
 MFA requires users to provide more than one authentication factor before access is granted.
 
-This reduces the risk associated with compromised passwords.
+This significantly reduces the risk associated with stolen or compromised passwords.
 
 ### Microsoft Authenticator
 
-Microsoft Authenticator provides an additional authentication factor using a registered mobile device.
+Microsoft Authenticator provides an additional authentication factor through a registered mobile device.
 
-### Identity Protection
+Authenticator can be used to approve authentication requests and provide additional verification during the sign-in process.
 
-Requiring an additional authentication factor significantly improves account security compared with password-only authentication.
+### Identity Security
+
+Identity is a major security boundary in modern cloud environments.
+
+Strengthening authentication helps protect organisational resources against credential theft and account takeover.
 
 ### MFA Prompt Context
 
-Displaying application name and geographic location gives users additional information when evaluating an authentication request.
+Displaying the application name and geographic location provides users with additional context when reviewing an authentication request.
 
-This can help users identify suspicious authentication attempts.
+This can help users recognise authentication attempts they did not initiate.
 
 ### System-Preferred MFA
 
-Microsoft Entra can select the most secure authentication method registered by a user instead of relying solely on a user-selected default method.
+System-preferred MFA allows Microsoft Entra ID to determine the most secure authentication method available to a user rather than relying solely on the user's manually selected default method.
+
+---
+
+## Security Benefits
+
+Implementing MFA provides protection against several common identity-based threats:
+
+- Stolen passwords
+- Credential stuffing
+- Password spraying
+- Phishing
+- Unauthorized account access
+- Account takeover
+
+MFA therefore forms an important component of a Zero Trust identity security strategy.
 
 ---
 
@@ -153,14 +176,14 @@ Microsoft Entra can select the most secure authentication method registered by a
 - Microsoft Entra ID administration
 - Identity and Access Management (IAM)
 - Multi-Factor Authentication (MFA)
-- Microsoft Authenticator deployment
-- Authentication method configuration
-- MFA registration
+- Microsoft Authenticator configuration
+- Authentication method policies
+- User MFA registration
 - Authentication troubleshooting
-- Sign-in monitoring
 - Identity security
 - Security Defaults
 - User authentication management
+- Microsoft Entra sign-in monitoring
 
 ---
 
@@ -168,17 +191,19 @@ Microsoft Entra can select the most secure authentication method registered by a
 
 In an enterprise environment, MFA is a critical identity security control.
 
-An administrator may use Microsoft Entra ID to require MFA for users accessing corporate resources and configure authentication methods such as Microsoft Authenticator.
+Administrators can use Microsoft Entra ID to strengthen authentication for users accessing corporate applications and cloud resources.
 
-MFA can help protect organisations against threats including:
+Microsoft Authenticator can provide users with an additional authentication factor while also providing contextual information about authentication requests.
 
-- Credential theft
-- Password compromise
-- Phishing
-- Unauthorized account access
-- Account takeover
+MFA can also be combined with additional Microsoft Entra security capabilities such as:
 
-Additional controls such as Conditional Access, Identity Protection and Privileged Identity Management can further strengthen the organisation's identity security posture.
+- Conditional Access
+- Privileged Identity Management (PIM)
+- Identity Protection
+- Access Reviews
+- Identity Governance
+
+Together, these technologies can provide stronger controls over who can access organisational resources and under what conditions.
 
 ---
 
@@ -186,6 +211,12 @@ Additional controls such as Conditional Access, Identity Protection and Privileg
 
 Successfully configured and tested Microsoft Entra ID Multi-Factor Authentication using Microsoft Authenticator.
 
-The lab demonstrated the end-to-end process of configuring Authenticator security settings, registering a user for MFA, verifying the registered authentication method and reviewing the resulting authentication configuration.
+The lab demonstrated the process of configuring Authenticator security settings, requiring user MFA registration, registering Microsoft Authenticator and verifying the resulting authentication configuration.
 
-This project provided hands-on experience with Microsoft Entra ID identity security controls commonly used in enterprise IAM environments.
+This project provided practical hands-on experience with Microsoft Entra ID identity security controls commonly used within enterprise Identity and Access Management environments.
+
+---
+
+## Portfolio Skills
+
+**Microsoft Entra ID | IAM | MFA | Microsoft Authenticator | Identity Security | Authentication Methods | Security Defaults | Sign-in Monitoring**
