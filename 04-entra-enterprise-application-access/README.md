@@ -54,6 +54,7 @@ The application was configured as a single-tenant application, meaning authentic
 - Configured the application as single tenant
 - Configured a web redirect URI
 - Created application credentials using a client secret
+- Assigned an application owner
 - Reviewed the relationship between the App Registration and Enterprise Application/service principal
 
 The client secret value was never stored in the GitHub repository.
@@ -64,24 +65,22 @@ The client secret value was never stored in the GitHub repository.
 
 Custom application roles were created to simulate role-based access to the Falcon Tech Employee Portal.
 
-### Roles Created
+### Employee
 
-**Employee**
+Provides standard employee access to the application.
 
-Standard employee access to the application.
+### Portal Administrator
 
-**Portal Administrator**
+Provides administrative access to the Falcon Tech Employee Portal.
 
-Administrative access to the Falcon Tech Employee Portal.
-
-The following test assignments were configured:
+### Role Assignments
 
 - Adam Wilson → Employee
 - David Brown → Portal Administrator
 
 These roles demonstrate how application roles can be assigned through Microsoft Entra ID and included as role claims in authentication tokens.
 
-The application itself would be responsible for reading these claims and enforcing the appropriate authorization within the application.
+The application itself would be responsible for reading these claims and enforcing the appropriate authorization.
 
 ---
 
@@ -89,32 +88,49 @@ The application itself would be responsible for reading these claims and enforci
 
 Microsoft Graph permissions were configured for the Falcon Tech Employee Portal.
 
-Permissions included:
+### Delegated Permissions
 
-- `User.Read` – Delegated
-- `User.ReadBasic.All` – Delegated
-- `User.Read.All` – Application
+- `User.Read`
+- `User.ReadBasic.All`
 
-Administrative consent was granted for the required Microsoft Graph application permission.
+### Application Permission
 
-The `User.Read.All` application permission was used later in the lab to demonstrate app-only access to Microsoft Graph.
+- `User.Read.All`
+
+The `User.Read.All` application permission requires administrator consent because it allows the application to read user profiles without an interactive user being signed in.
+
+Administrative consent was granted within the lab tenant.
+
+This permission was later validated by performing an app-only Microsoft Graph request.
 
 ---
 
-## Part 5 – OAuth 2.0 Client Credentials Flow
+## Part 5 – Client Credential Configuration
+
+A client secret was created for the Falcon Tech Employee Portal.
+
+The credential allows the application to prove its identity to Microsoft Entra ID when requesting an OAuth access token.
+
+The client secret value is treated as a sensitive credential and is not included in this repository.
+
+During testing, an exposed test credential was revoked and rotated, demonstrating appropriate credential management and incident-response practice.
+
+---
+
+## Part 6 – OAuth 2.0 Client Credentials Flow
 
 To test the application identity, I used the **OAuth 2.0 Client Credentials Flow**.
 
-Unlike delegated authentication, this flow does not require a user to sign in.
+Unlike delegated authentication, this flow does not require a user to interactively sign in.
 
 The application authenticated using:
 
-- Tenant ID
+- Directory (Tenant) ID
 - Application (Client) ID
 - Client credential
-- OAuth 2.0 token endpoint
+- Microsoft Entra OAuth 2.0 token endpoint
 
-The application requested access to Microsoft Graph using:
+The application requested its configured Microsoft Graph application permissions using:
 
 `https://graph.microsoft.com/.default`
 
@@ -128,25 +144,25 @@ No client secrets or access tokens are included in this repository.
 
 ---
 
-## Part 6 – Microsoft Graph API Test
+## Part 7 – Microsoft Graph API Test
 
-After obtaining the OAuth access token, I used PowerShell to send an authenticated request to Microsoft Graph.
+After obtaining an OAuth access token, I used PowerShell to send an authenticated request to Microsoft Graph.
 
-The request queried:
+The application queried:
 
 `GET /v1.0/users`
 
-Only the `displayName` property was displayed as evidence to avoid unnecessarily exposing tenant information.
+The request selected only the `displayName` property for the portfolio evidence.
 
-Microsoft Graph successfully returned the test users from the Entra tenant.
+Microsoft Graph successfully returned the test users from the Microsoft Entra tenant.
 
 This confirmed that:
 
-1. The application could authenticate to Microsoft Entra ID.
+1. The Falcon Tech Employee Portal could authenticate as an application.
 2. OAuth 2.0 Client Credentials authentication was functioning.
-3. The application received an access token.
+3. Microsoft Entra ID successfully issued an access token.
 4. The admin-consented `User.Read.All` application permission was effective.
-5. The application could successfully access Microsoft Graph without an interactive user sign-in.
+5. The application could access Microsoft Graph without an interactive user sign-in.
 
 ---
 
