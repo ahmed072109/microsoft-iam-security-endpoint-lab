@@ -1,10 +1,10 @@
-# Project 4 – Microsoft Entra ID Enterprise Application Access Management
+# Project 4 – Microsoft Entra ID Enterprise Application Access & Microsoft Graph
 
 ## Objective
 
-Create and configure an Enterprise Application in Microsoft Entra ID and implement controlled user access using application assignments.
+Configure and test enterprise application access in Microsoft Entra ID, progressing from basic user assignment and auditing to application registration, role-based application access, Microsoft Graph permissions, and OAuth 2.0 app-only authentication.
 
-The purpose of this lab was to demonstrate how Microsoft Entra ID can be used to manage access to enterprise applications, enforce assignment-based access, understand service principals, and audit application access changes.
+This lab demonstrates how Microsoft Entra ID can be used to manage application identities, control user access, implement application roles, grant API permissions using least privilege, and authenticate an application to Microsoft Graph.
 
 ---
 
@@ -13,294 +13,160 @@ The purpose of this lab was to demonstrate how Microsoft Entra ID can be used to
 - Microsoft Entra ID
 - Microsoft Entra Admin Center
 - Enterprise Applications
-- Non-gallery Enterprise Application
-- Test Application: Falcon Tech Service Desk
-- Test User: Adam Wilson
-- Microsoft Entra Audit Logs
+- App Registrations
+- Microsoft Graph
+- PowerShell
+- OAuth 2.0
+- Test Enterprise Application: Falcon Tech Service Desk
+- Test App Registration: Falcon Tech Employee Portal
+- Test users created within the lab tenant
 
 ---
 
-## Scenario
+## Part 1 – Enterprise Application Access Management
 
-Falcon Tech is introducing a new internal Service Desk application for IT support operations.
+I created and configured the **Falcon Tech Service Desk** Enterprise Application in Microsoft Entra ID.
 
-Rather than allowing unrestricted access, the application should be managed through Microsoft Entra ID so that only explicitly authorised users can access it.
+The application was used to demonstrate how Entra ID represents applications through service principals and how administrators can control which identities are assigned access.
 
-The following requirements were implemented:
+### Tasks Completed
 
-- Create the Falcon Tech Service Desk Enterprise Application
-- Assign an authorised user to the application
-- Require explicit user assignment for access
-- Review application permissions
-- Verify application configuration
-- Review Microsoft Entra audit logs for application-related changes
+- Created a non-gallery Enterprise Application
+- Reviewed the Enterprise Application/service principal
+- Configured application access properties
+- Assigned a test user to the application
+- Verified the application assignment against the user account
+- Reviewed Microsoft Entra audit logs for application access changes
 
----
-
-## 1. Create the Enterprise Application
-
-A new non-gallery Enterprise Application named **Falcon Tech Service Desk** was created in Microsoft Entra ID.
-
-The Enterprise Application represents the application's service principal within the Falcon Tech Entra tenant.
-
-The application overview provides administrative options for managing:
-
-- Users and groups
-- Single Sign-On (SSO)
-- User provisioning
-- Conditional Access
-- Permissions
-- Sign-in activity
-- Audit activity
-
-![Enterprise Application Overview](01-enterprise-application-overview.png)
+This demonstrated how Entra ID can centrally manage access to enterprise applications and provide an audit trail of administrative changes.
 
 ---
 
-## 2. Assign User Access
+## Part 2 – Falcon Tech Employee Portal App Registration
 
-The test user **Adam Wilson** was explicitly assigned access to the Falcon Tech Service Desk application.
+I created a second application called **Falcon Tech Employee Portal** using Microsoft Entra App Registrations.
 
-Direct user assignment was used in this lab due to the licensing level of the lab tenant.
+The application was configured as a single-tenant application, meaning authentication is restricted to identities within the Falcon Tech lab tenant.
 
-Application assignment allows administrators to control which identities are authorised to access a specific Enterprise Application.
+### Configuration
 
-![User Application Assignment](02-user-application-assignment.png)
+- Registered Falcon Tech Employee Portal in Microsoft Entra ID
+- Configured the application as single tenant
+- Configured a web redirect URI
+- Created application credentials using a client secret
+- Reviewed the relationship between the App Registration and Enterprise Application/service principal
 
----
-
-## 3. Enforce Assignment-Based Access
-
-The Enterprise Application properties were reviewed to verify the application's access configuration.
-
-The following settings were confirmed:
-
-- **Enabled for users to sign-in:** Yes
-- **Assignment required:** Yes
-
-With assignment required, users must be explicitly assigned to the Enterprise Application before they are permitted to access it.
-
-This provides greater control over application access and supports the principle of least privilege.
-
-![Application Access Properties](03-application-access-properties.png)
+The client secret value was never stored in the GitHub repository.
 
 ---
 
-## 4. Review Application Permissions
+## Part 3 – Application Roles
 
-The application's permissions configuration was reviewed.
+Custom application roles were created to simulate role-based access to the Falcon Tech Employee Portal.
 
-No admin-consented API permissions had been granted to the application.
+### Roles Created
 
-No unnecessary permissions were added during the lab.
+**Employee**
 
-This demonstrates an important IAM principle: applications should only receive the permissions required for their intended purpose.
+Standard employee access to the application.
 
----
+**Portal Administrator**
 
-## 5. Review Enterprise Application Audit Logs
+Administrative access to the Falcon Tech Employee Portal.
 
-Microsoft Entra audit logs were reviewed to verify the administrative changes performed during the lab.
+The following test assignments were configured:
 
-The audit trail recorded successful events including:
+- Adam Wilson → Employee
+- David Brown → Portal Administrator
 
-- Service principal creation
-- Service principal updates
-- Application role assignment
+These roles demonstrate how application roles can be assigned through Microsoft Entra ID and included as role claims in authentication tokens.
 
-The user assignment was recorded as an application role assignment operation.
-
-![Enterprise Application Audit Logs](04-enterprise-application-audit-logs.png)
+The application itself would be responsible for reading these claims and enforcing the appropriate authorization within the application.
 
 ---
 
-## Enterprise Application vs App Registration
+## Part 4 – Microsoft Graph API Permissions
 
-An important concept demonstrated in this lab is the relationship between an application object and a service principal.
+Microsoft Graph permissions were configured for the Falcon Tech Employee Portal.
 
-### App Registration
+Permissions included:
 
-An App Registration defines an application's identity configuration within Microsoft Entra ID.
+- `User.Read` – Delegated
+- `User.ReadBasic.All` – Delegated
+- `User.Read.All` – Application
 
-It can contain configuration such as:
+Administrative consent was granted for the required Microsoft Graph application permission.
 
-- Application ID
-- Authentication configuration
-- Redirect URIs
-- API permissions
-- Credentials
-- Application roles
-
-### Enterprise Application
-
-An Enterprise Application represents the application's **service principal** within a Microsoft Entra tenant.
-
-The service principal is used to manage how the application interacts with identities in that tenant.
-
-Administrators can use the Enterprise Application to manage:
-
-- User and group assignments
-- Single Sign-On
-- Provisioning
-- Permissions and consent
-- Conditional Access
-- Sign-in activity
-- Audit activity
-
-Understanding the relationship between App Registrations and Enterprise Applications is an important Microsoft Entra ID administration concept.
+The `User.Read.All` application permission was used later in the lab to demonstrate app-only access to Microsoft Graph.
 
 ---
 
-## Identity Access Flow
+## Part 5 – OAuth 2.0 Client Credentials Flow
 
-The access model implemented in this lab can be represented as:
+To test the application identity, I used the **OAuth 2.0 Client Credentials Flow**.
 
-**Microsoft Entra User**
+Unlike delegated authentication, this flow does not require a user to sign in.
 
-↓
+The application authenticated using:
 
-**Enterprise Application Assignment**
+- Tenant ID
+- Application (Client) ID
+- Client credential
+- OAuth 2.0 token endpoint
 
-↓
+The application requested access to Microsoft Graph using:
 
-**Falcon Tech Service Desk Service Principal**
+`https://graph.microsoft.com/.default`
 
-↓
+Microsoft Entra ID successfully authenticated the application and issued an OAuth access token.
 
-**Assignment Requirement Evaluated**
+The returned token type was:
 
-↓
+`Bearer`
 
-**Authorised Application Access**
-
-This demonstrates how application access can be controlled through identity assignments rather than providing unrestricted access to all users.
-
----
-
-## RBAC vs Enterprise Application Assignment
-
-This lab also demonstrates the difference between administrative role assignments and application access assignments.
-
-### Microsoft Entra RBAC
-
-An Entra role such as **Helpdesk Administrator** grants administrative permissions within Microsoft Entra ID.
-
-### Enterprise Application Assignment
-
-An Enterprise Application assignment grants an identity access to a specific application.
-
-For example, Adam Wilson having the **Helpdesk Administrator** role does not automatically mean that he should have access to every Enterprise Application.
-
-Application access should be granted separately according to business requirements.
-
-This separation supports least privilege and separation of duties.
+No client secrets or access tokens are included in this repository.
 
 ---
 
-## Security Concepts Demonstrated
+## Part 6 – Microsoft Graph API Test
 
-### Least Privilege
+After obtaining the OAuth access token, I used PowerShell to send an authenticated request to Microsoft Graph.
 
-Users should only receive access to applications required to perform their job responsibilities.
+The request queried:
 
-### Explicit Application Assignment
+`GET /v1.0/users`
 
-Requiring application assignment prevents unauthorised users from accessing applications simply because they exist within the organisation's Entra environment.
+Only the `displayName` property was displayed as evidence to avoid unnecessarily exposing tenant information.
 
-### Service Principals
+Microsoft Graph successfully returned the test users from the Entra tenant.
 
-A service principal represents an application's identity within a Microsoft Entra tenant.
+This confirmed that:
 
-It allows administrators to control how the application interacts with users and organisational resources.
-
-### Application Permissions and Consent
-
-Application permissions determine what resources and APIs an application may access.
-
-Permissions should be reviewed carefully and unnecessary consent should be avoided.
-
-### Audit Logging
-
-Microsoft Entra audit logs provide visibility into identity and application administration activities.
-
-Audit records can help administrators investigate:
-
-- Application creation
-- Service principal changes
-- User assignments
-- Permission changes
-- Other administrative activity
+1. The application could authenticate to Microsoft Entra ID.
+2. OAuth 2.0 Client Credentials authentication was functioning.
+3. The application received an access token.
+4. The admin-consented `User.Read.All` application permission was effective.
+5. The application could successfully access Microsoft Graph without an interactive user sign-in.
 
 ---
 
-## Licensing Observation
+## Authentication Flow
 
-During the lab, the tenant allowed individual users to be assigned to the Enterprise Application.
-
-Group-based application assignment was unavailable under the current lab tenant licensing level.
-
-This demonstrated how Microsoft Entra licensing can affect the identity and application management capabilities available to administrators.
-
----
-
-## SC-300 Relevance
-
-This project provides practical experience relevant to the **Microsoft Identity and Access Administrator (SC-300)** certification.
-
-The lab demonstrates concepts including:
-
-- Enterprise Application management
-- Service principals
-- User application assignments
-- Application access control
-- Least privilege
-- Permissions and consent
-- Microsoft Entra audit logs
-- Identity-based application access
-- Enterprise application administration
-
-These concepts are important when managing authentication and access to applications using Microsoft Entra ID.
-
----
-
-## Skills Demonstrated
-
-- Microsoft Entra ID administration
-- Identity and Access Management (IAM)
-- Enterprise Application management
-- Service principal management
-- User application assignment
-- Application access control
-- Least privilege
-- Permissions and consent review
-- Microsoft Entra audit logging
-- Identity security
-- Application access governance
-
----
-
-## Real-World Application
-
-In an enterprise environment, organisations commonly integrate SaaS and internal applications with Microsoft Entra ID.
-
-Identity administrators are responsible for ensuring that access to these applications is appropriately controlled.
-
-Rather than allowing every employee to access every application, administrators can use Enterprise Application assignments to provide access only to authorised identities.
-
-Combined with technologies such as Single Sign-On, Conditional Access, automated provisioning, Privileged Identity Management, and Identity Governance, Microsoft Entra ID can provide centralised control over application access.
-
----
-
-## Outcome
-
-Successfully created and configured the **Falcon Tech Service Desk** Enterprise Application in Microsoft Entra ID.
-
-The lab demonstrated how to assign an authorised user to an Enterprise Application, verify assignment-required access, review application permissions, understand the role of the service principal, and investigate administrative activity through Microsoft Entra audit logs.
-
-This project provided hands-on experience with enterprise application access management and Microsoft Entra ID concepts relevant to real-world Identity and Access Management environments.
-
----
-
-## Portfolio Skills
-
-**Microsoft Entra ID | IAM | Enterprise Applications | Service Principals | Application Access | Least Privilege | Permissions | Audit Logs | SC-300**
+```text
+Falcon Tech Employee Portal
+        |
+        | Client ID + Client Credential
+        v
+Microsoft Entra ID
+        |
+        | OAuth 2.0 Client Credentials Flow
+        v
+OAuth Access Token
+        |
+        | Bearer Token
+        v
+Microsoft Graph
+        |
+        | User.Read.All
+        v
+Entra ID User Data
