@@ -154,4 +154,3 @@ Successfully implemented a basic enterprise IAM structure within Microsoft Entra
   This environment will be used as the foundation for additional IAM, security and endpoint management projects.
 - Audit verification of membership changes
 
-This environment will be used as the foundation for additional IAM, security and endpoint management projects.
