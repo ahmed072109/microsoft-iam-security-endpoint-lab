@@ -2,17 +2,17 @@
 
 A hands-on Microsoft cloud security portfolio focused on **Identity and Access Management (IAM)** using Microsoft Entra ID.
 
-This repository documents practical labs I have built to develop real-world skills in identity administration, authentication, authorization, application identity, Microsoft Graph and security.
+This repository documents practical labs I have built to develop real-world skills across identity administration, authentication, authorization, application access, Microsoft Graph, OAuth 2.0 and identity lifecycle management.
 
-The environment is designed to simulate common identity and access scenarios that an **Identity & Access Administrator, IAM Analyst, Cloud Administrator or IT Security professional** may encounter.
+The environment simulates common scenarios encountered by **Identity & Access Administrators, IAM Analysts, Cloud Administrators and IT Security professionals**.
 
 ---
 
 ## 🎯 Objectives
 
-The purpose of this lab environment is to develop and demonstrate practical experience with Microsoft identity and security technologies rather than relying solely on theoretical certification knowledge.
+The purpose of this lab environment is to demonstrate practical Microsoft identity and security experience alongside certification study.
 
-Current areas covered include:
+Key areas covered include:
 
 - Microsoft Entra ID
 - Identity and Access Management (IAM)
@@ -24,182 +24,190 @@ Current areas covered include:
 - Enterprise Applications
 - App Registrations
 - Application Roles
-- Microsoft Graph
-- API Permissions
+- Microsoft Graph API
 - OAuth 2.0
-- Client Credentials Flow
-- PowerShell
-- Application / Workload Identity
+- API Permissions and Admin Consent
+- Identity Lifecycle Management
+- Joiner, Mover and Leaver (JML) processes
+- Security auditing and sign-in investigation
 
 ---
 
-# 🧪 Completed Projects
+# 🧪 Lab Projects
 
 ## Project 1 – Microsoft Entra ID User & Group Management
 
-📁 [`01-entra-user-group-management`](01-entra-user-group-management)
+📁 [View Project](./01-entra-user-group-management)
 
-Built a test identity environment and performed core Microsoft Entra ID user and group administration.
+Built a structured Microsoft Entra ID identity environment and performed core identity administration tasks.
 
-### Hands-On Tasks
+### Skills demonstrated
 
-- Created and managed test user accounts
-- Configured user profile information
-- Created security groups
-- Added and managed group membership
-- Practised identity administration within Microsoft Entra ID
-- Documented configuration with lab evidence
-
-### Skills
-
-`Microsoft Entra ID` `IAM` `User Management` `Group Management` `Identity Administration`
+- User account creation
+- Security group creation
+- Group membership management
+- Identity administration
+- Microsoft Entra ID navigation
+- Audit log verification
 
 ---
 
 ## Project 2 – Microsoft Entra ID RBAC & Least Privilege
 
-📁 [`02-entra-rbac-least-privilege`](02-entra-rbac-least-privilege)
+📁 [View Project](./02-entra-rbac-least-privilege)
 
-Implemented role-based administrative access using Microsoft Entra ID built-in roles.
+Implemented administrative access using Microsoft Entra built-in roles and least-privilege principles.
 
-### Hands-On Tasks
+### Skills demonstrated
 
-- Reviewed Microsoft Entra administrative roles
-- Assigned administrative permissions to test identities
-- Implemented least-privilege access
-- Verified role assignments
-- Reviewed administrative access and role configuration
-
-### Skills
-
-`RBAC` `Least Privilege` `Entra Roles` `IAM` `Access Control`
+- Role-Based Access Control (RBAC)
+- Administrative role assignment
+- Least-privilege access
+- Privileged access concepts
+- Role assignment verification
+- Audit log analysis
 
 ---
 
-## Project 3 – Microsoft Entra ID MFA & Microsoft Authenticator
+## Project 3 – Microsoft Entra ID MFA & Authentication Security
 
-📁 [`03-entra-id-mfa-authenticator`](03-entra-id-mfa-authenticator)
+📁 [View Project](./03-entra-id-mfa-authenticator)
 
-Configured and tested Multi-Factor Authentication using Microsoft Authenticator and Microsoft Entra ID Security Defaults.
+Configured and tested Multi-Factor Authentication using Microsoft Authenticator and Microsoft Entra Security Defaults.
 
-### Hands-On Tasks
+### Skills demonstrated
 
-- Enabled and reviewed Security Defaults
-- Configured Microsoft Authenticator as an authentication method
-- Registered MFA for a test identity
-- Tested Microsoft Authenticator number matching
-- Verified successful MFA authentication
-- Reviewed Entra ID sign-in logs and authentication details
-- Troubleshot authentication and password-related sign-in issues
-
-### Skills
-
-`MFA` `Microsoft Authenticator` `Security Defaults` `Authentication` `Sign-in Logs` `Entra ID`
+- Multi-Factor Authentication (MFA)
+- Microsoft Authenticator
+- Authentication method configuration
+- MFA registration
+- Number matching
+- Security Defaults
+- Sign-in log investigation
+- Authentication troubleshooting
 
 ---
 
-## Project 4 – Microsoft Entra ID Application Identity, OAuth 2.0 & Microsoft Graph
+## Project 4 – Microsoft Entra Enterprise Application & Access Management
 
-📁 [`04-entra-enterprise-application-access`](04-entra-enterprise-application-access)
+📁 [View Project](./04-entra-enterprise-application-access)
 
-Built and tested an application identity using Microsoft Entra ID, progressing from App Registration and application roles to OAuth 2.0 app-only authentication and Microsoft Graph API access.
+Configured and investigated Microsoft Entra enterprise application access and user assignment.
 
-### Hands-On Tasks
+### Skills demonstrated
 
-- Created the **Falcon Tech Employee Portal** App Registration
-- Configured a single-tenant application
-- Assigned application ownership
-- Configured a web redirect URI
-- Created and managed a client credential
-- Configured Microsoft Graph delegated permissions
-- Added the `User.Read.All` Application permission
-- Granted administrator consent
-- Created custom application roles
-- Assigned Employee and Portal Administrator roles to test identities
-- Used OAuth 2.0 Client Credentials Flow
-- Authenticated the application using PowerShell
-- Obtained a Bearer access token from Microsoft Entra ID
-- Queried Microsoft Graph using app-only authentication
-- Successfully retrieved directory user data through Microsoft Graph
-- Revoked and rotated an exposed test credential
-- Protected secrets and access tokens from the public repository
-
-### Skills
-
-`App Registrations` `Enterprise Applications` `Service Principals` `Application Roles` `Microsoft Graph` `OAuth 2.0` `Client Credentials` `API Permissions` `Admin Consent` `PowerShell` `Workload Identity`
+- Enterprise Applications
+- User application assignment
+- Application access management
+- Assignment requirements
+- Access configuration
+- Enterprise application auditing
 
 ---
 
-# 🔐 Security Concepts Demonstrated
+## Project 5 – Microsoft Entra App Registration & API Permissions
 
-Across the projects, the lab demonstrates practical understanding of:
+📁 [View Project](./05-entra-app-registration-api-permissions)
 
-- Authentication vs Authorization
-- Identity Lifecycle Administration
-- Role-Based Access Control
-- Least-Privilege Access
-- Multi-Factor Authentication
-- Application Identity
-- Human Identity vs Workload Identity
-- Delegated vs Application Permissions
-- Administrator Consent
-- OAuth 2.0
-- Bearer Access Tokens
-- Client Credential Protection
-- Credential Rotation
-- Microsoft Graph Authorization
-- Security Auditing
+Built an application identity in Microsoft Entra ID and configured Microsoft Graph access using delegated and application permissions.
+
+The lab also demonstrated application-only authentication using the **OAuth 2.0 Client Credentials Flow** and successfully queried Microsoft Graph.
+
+### Skills demonstrated
+
+- Microsoft Entra App Registrations
+- Microsoft Graph API
+- Delegated permissions
+- Application permissions
+- Admin consent
+- Application ownership
+- Redirect URI configuration
+- Client credentials
+- App roles
+- OAuth 2.0 Client Credentials Flow
+- Bearer access tokens
+- Microsoft Graph API testing
+- Application identity security
+
+---
+
+## Project 6 – Microsoft Entra ID Identity Lifecycle Management (JML)
+
+📁 [View Project](./06-entra-identity-lifecycle-jml)
+
+Implemented a practical **Joiner, Mover and Leaver (JML)** identity lifecycle scenario to demonstrate how user access changes throughout an employee's lifecycle.
+
+### Skills demonstrated
+
+- Identity lifecycle management
+- Joiner provisioning
+- User account administration
+- Group-based access
+- Access changes during role movement
+- Leaver deprovisioning
+- Access removal
+- Identity governance concepts
+- Audit log verification
+
+---
+
+# 🔐 Security Principles Demonstrated
+
+Across the projects, the lab applies key identity and security principles including:
+
+- **Least Privilege** – users and administrators receive only the permissions required.
+- **Strong Authentication** – MFA is used to strengthen account security.
+- **Role-Based Access Control** – administrative permissions are assigned through appropriate roles.
+- **Application Identity Security** – applications authenticate securely and receive controlled API permissions.
+- **Consent Management** – privileged Microsoft Graph permissions require administrator approval.
+- **Identity Lifecycle Management** – access is provisioned, modified and removed as identities move through their lifecycle.
+- **Auditability** – sign-in and audit logs are reviewed to validate identity and access changes.
 
 ---
 
 # 🛠 Technologies Used
 
-| Technology | Practical Use |
-|---|---|
-| Microsoft Entra ID | Identity and access administration |
-| Microsoft Authenticator | Multi-factor authentication |
-| Microsoft Graph | Microsoft cloud API access |
-| PowerShell | OAuth and Graph testing |
-| OAuth 2.0 | Application authentication |
-| Entra App Registrations | Application identity configuration |
-| Enterprise Applications | Service principal and application access |
-| GitHub | Lab documentation and portfolio evidence |
+- Microsoft Entra ID
+- Microsoft Azure
+- Microsoft Authenticator
+- Microsoft Graph
+- OAuth 2.0
+- PowerShell
+- GitHub
 
 ---
 
-# 📈 Portfolio Progress
+# 📚 Certification Alignment
 
-| Project | Area | Status |
-|---|---|---|
-| 01 | User & Group Management | ✅ Complete |
-| 02 | RBAC & Least Privilege | ✅ Complete |
-| 03 | MFA & Microsoft Authenticator | ✅ Complete |
-| 04 | Application Identity, OAuth & Microsoft Graph | ✅ Complete |
+These labs support practical learning relevant to Microsoft identity, endpoint and security certification paths, including:
+
+- **SC-300 – Microsoft Identity and Access Administrator**
+- **MD-102 – Microsoft 365 Endpoint Administrator**
+- **MS-102 – Microsoft 365 Administrator**
+
+The primary current focus of the portfolio is **Microsoft Entra ID and Identity & Access Management**.
 
 ---
 
-# 🚀 Next Steps
+# 🚀 Portfolio Goal
 
-This repository will continue to expand with additional Microsoft identity, security and endpoint-management labs.
+The goal of this repository is to demonstrate practical cloud identity and security skills beyond theoretical certification knowledge.
 
-Planned areas include:
+Each project contains configuration evidence, screenshots and documentation showing how Microsoft identity technologies can be applied to realistic administrative and security scenarios.
+
+The portfolio will continue to expand into areas including:
 
 - Conditional Access
 - Privileged Identity Management (PIM)
 - Identity Governance
 - Access Reviews
-- Lifecycle Workflows
+- Entitlement Management
 - Microsoft Intune
 - Endpoint Security
 - Microsoft Defender
-- Additional Microsoft Graph automation
+- Security monitoring and investigation
 
----
 
-## About This Repository
-
-This repository is a personal hands-on learning environment built to complement my Microsoft certification studies and professional IT experience.
-
-All users, applications and scenarios used in the labs are test identities and fictional business scenarios created for learning purposes.
-
-Sensitive credentials, client secrets and access tokens are not intentionally stored within the repository.
+- Endpoint Security
+- Microsoft Defender
+- Security monitoring and investigation
