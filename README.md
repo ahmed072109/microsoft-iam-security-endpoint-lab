@@ -1,4 +1,4 @@
-# Microsoft IAM, Security & Endpoint Lab
+# Microsoft Entra ID & IAM Lab Portfolio
 
 A hands-on Microsoft cloud security portfolio focused on **Identity and Access Management (IAM)** using Microsoft Entra ID.
 
@@ -179,35 +179,43 @@ Across the projects, the lab applies key identity and security principles includ
 
 # 📚 Certification Alignment
 
-These labs support practical learning relevant to Microsoft identity, endpoint and security certification paths, including:
+These labs provide hands-on experience relevant to the **SC-300 – Microsoft Identity and Access Administrator** certification and Microsoft identity administration roles.
 
-- **SC-300 – Microsoft Identity and Access Administrator**
-- **MD-102 – Microsoft 365 Endpoint Administrator**
-- **MS-102 – Microsoft 365 Administrator**
+The portfolio complements certification study by demonstrating practical experience with:
 
-The primary current focus of the portfolio is **Microsoft Entra ID and Identity & Access Management**.
+- Microsoft Entra ID administration
+- Identity and Access Management (IAM)
+- Role-Based Access Control (RBAC)
+- Multi-Factor Authentication (MFA)
+- Enterprise Applications
+- App Registrations
+- Microsoft Graph API
+- OAuth 2.0 authentication
+- API permissions and admin consent
+- Identity lifecycle management
+- Joiner, Mover and Leaver (JML) processes
+- Identity auditing and investigation
+
+> Some advanced Microsoft Entra capabilities, including Conditional Access, Privileged Identity Management (PIM), Access Reviews and Entitlement Management, require Microsoft Entra premium licensing and are therefore covered through certification study rather than represented as completed hands-on labs in this environment.
 
 ---
 
-# 🚀 Portfolio Goal
+# 💼 Portfolio Summary
 
-The goal of this repository is to demonstrate practical cloud identity and security skills beyond theoretical certification knowledge.
+This repository contains **six hands-on Microsoft Entra ID projects** demonstrating practical Identity and Access Management experience.
 
-Each project contains configuration evidence, screenshots and documentation showing how Microsoft identity technologies can be applied to realistic administrative and security scenarios.
+The projects progress from core identity administration through authentication, authorization, application identity and identity lifecycle management.
 
-The portfolio will continue to expand into areas including:
+### Core technologies and skills
 
-- Conditional Access
-- Privileged Identity Management (PIM)
-- Identity Governance
-- Access Reviews
-- Entitlement Management
-- Microsoft Intune
-- Endpoint Security
-- Microsoft Defender
-- Security monitoring and investigation
+`Microsoft Entra ID` • `IAM` • `RBAC` • `Least Privilege` • `MFA` • `Microsoft Authenticator` • `Enterprise Applications` • `App Registrations` • `Microsoft Graph` • `OAuth 2.0` • `API Permissions` • `Admin Consent` • `Application Identity` • `Identity Lifecycle Management` • `Joiner-Mover-Leaver (JML)` • `Audit Logs`
 
+Each project includes configuration evidence, screenshots and documentation demonstrating the implementation and validation of the relevant identity controls.
 
-- Endpoint Security
-- Microsoft Defender
-- Security monitoring and investigation
+---
+
+# 🚀 Portfolio Development
+
+This repository represents the **Identity and Access Management** component of my hands-on technical portfolio.
+
+Additional lab portfolios will cover other areas of enterprise IT infrastructure and administration separately, allowing each repository to remain focused on a specific technical discipline.
